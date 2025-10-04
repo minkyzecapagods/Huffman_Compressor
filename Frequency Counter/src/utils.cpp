@@ -1,8 +1,10 @@
 #include "../include/utils.hpp"
+#include "../include/FrequencyCounter.hpp"
+
+#include <fstream>
 
 using namespace std;
 
-// Define the global sets declared in the header (one definition only)
 set<string> keywords = {
         "auto", "break", "case", "char", "const", "continue", "default",
         "do", "double", "else", "enum", "extern", "float", "for", "goto",
@@ -126,6 +128,7 @@ bool isInStringOrComment(const string& text, size_t pos){
         }
         
         if (text[i] == '\'') {
+
             inChar = true;
             charDelimiter = '\'';
             continue;
@@ -170,3 +173,11 @@ vector<pair<string, int>> unifyAndSort(const map<string, int> keywordCount,
 
     return allTokens;
 };
+
+
+void printToFile(string filename){
+    ofstream outputFile(filename + ".txt");
+    for (pair<string, int> i : sortedTokens){
+        outputFile << '"' << i.first << '"' << ' ' << i.second << endl;
+    }
+}

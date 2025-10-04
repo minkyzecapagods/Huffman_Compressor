@@ -33,3 +33,5 @@ vector<pair<string, int>> unifyAndSort(const map<string, int> keywordCount,
                                        const map<string, int> frequentIdentifiers,
                                        const map<string, int> charCount,
                                        const map<string, int> whitespaceCount);
+
+void printToFile(string filename);

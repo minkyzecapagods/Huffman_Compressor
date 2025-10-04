@@ -1,4 +1,5 @@
 #include "../include/FrequencyCounter.hpp"
+#include "../include/utils.hpp"
 
 #include <iostream>
 #include <set>
@@ -18,11 +19,8 @@ int main (int argc, char* argv[]){
     processFile(filename);
     
     organizeTokens();
-    
-    for (pair<string, int> i : sortedTokens){
-        cout << i.first << " : " << i.second << endl;
-    }
 
-    
+    printToFile("teste");
+
     return 0;
 }

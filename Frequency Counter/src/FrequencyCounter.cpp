@@ -67,7 +67,10 @@ void processFile(const string& filename){
     for (size_t i = 0; i < totalchars; i++){
         char currentChar = fullText[i];
 
-        if (isspace(currentChar)){
+        if (currentChar == '\n') {
+            whitespaceCount["\\n"]++;
+            continue;
+        } else if (isspace(currentChar)) {
             string tempString(1, currentChar);
             whitespaceCount[tempString]++;
             continue;
