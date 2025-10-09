@@ -15,6 +15,7 @@ map<string, int> operatorCount;
 map<string, int> identifierCount;
 map<string, int> charCount;
 map<string, int> whitespaceCount;
+map<string, int> frequentIdentifiers;
 
 vector<pair<string, int>> sortedTokens;
 
@@ -117,8 +118,6 @@ void processFile(const string& filename){
         }
     }
 
-    map<string, int> frequentIdentifiers;
-
     for (const auto& identifier : identifierCount){ //filtra palavras pouco frequentes 
         if (identifier.second > minimumFrequency){
             frequentIdentifiers[identifier.first] = identifier.second;
@@ -131,7 +130,7 @@ void organizeTokens(){
 
     sortedTokens = unifyAndSort(keywordCount,
                                 operatorCount,
-                                identifierCount,
+                                frequentIdentifiers,
                                 charCount,
                                 whitespaceCount);
 }
