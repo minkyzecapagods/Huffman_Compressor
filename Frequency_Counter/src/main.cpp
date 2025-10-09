@@ -1,4 +1,4 @@
-#include "../include/FrequencyCounter.hpp"
+#include "../include/frequencyCounter.hpp"
 #include "../include/utils.hpp"
 
 #include <iostream>

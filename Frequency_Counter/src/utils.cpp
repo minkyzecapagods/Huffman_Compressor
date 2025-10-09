@@ -1,5 +1,5 @@
 #include "../include/utils.hpp"
-#include "../include/FrequencyCounter.hpp"
+#include "../include/frequencyCounter.hpp"
 
 #include <fstream>
 
