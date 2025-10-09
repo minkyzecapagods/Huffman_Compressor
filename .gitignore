@@ -16,6 +16,7 @@
 
 # Debugger Files
 *.pdb
+/frequency_cheat/*
 
 # Compiled Dynamic libraries
 *.so
@@ -33,6 +34,7 @@
 *.lib
 
 # Executables
+frequency_counter
 *.exe
 *.out
 *.app

@@ -2,9 +2,9 @@
 CXX := g++
 CXXFLAGS := -std=c++17 -Wall -Wextra -Iinclude
 LDFLAGS := 
-TARGET := test
-BUILD_DIR := build
-SRC_DIR := src
+TARGET := frequency_counter
+BUILD_DIR := Frequency_Counter/build
+SRC_DIR := Frequency_Counter/src
 
 SRCS := $(shell find $(SRC_DIR) -name '*.cpp')
 OBJS := $(patsubst $(SRC_DIR)/%.cpp,$(BUILD_DIR)/%.o,$(SRCS))

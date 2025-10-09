@@ -1,5 +1,5 @@
 #include "../include/utils.hpp"
-#include "../include/FrequencyCounter.hpp"
+#include "../include/frequencyCounter.hpp"
 
 #include <fstream>
 
@@ -176,7 +176,7 @@ vector<pair<string, int>> unifyAndSort(const map<string, int> keywordCount,
 
 
 void printToFile(string filename){
-    ofstream outputFile(filename + ".txt");
+    ofstream outputFile("frequency_cheat/" +filename + ".txt");
     for (pair<string, int> i : sortedTokens){
         outputFile << '"' << i.first << '"' << ' ' << i.second << endl;
     }
