@@ -1,8 +1,15 @@
 #pragma once
 #include "huffmanTree.hpp"
 #include <iostream>
+#include <unordered_map>
 
-// Comparator for priority_queue used by Huffman tree (min-heap by frequency)
+extern unordered_map<string, size_t> frequencyCheet;
+
+//comparador de HuffmanNodes para a criação da priority queue
 struct compare{
     bool operator()(const shared_ptr<HuffmanNode>& left, const shared_ptr<HuffmanNode>& right);
 };
+
+
+//transforma o .txt do Frequency_Counter em um unordered_map
+void processFile(const string& fileName);
