@@ -1,26 +1,21 @@
 #include "../include/frequencyCounter.hpp"
 #include "../include/utils.hpp"
 
-#include <iostream>
-#include <set>
-#include <map>
-#include <vector>
-
 using namespace std;
 
 int main (int argc, char* argv[]){
 
     if(argc != 2){
-        cerr << "Erro: número incorreto de argumentos!" << endl;
+        cerr << "Error: incorrect number of arguments!" << endl;
         return 1;
     }
     string filename = argv[1];
 
     processFile(filename);
     
-    organizeTokens();
+    sortedTokens = unifyAndSort(stringFrequency, charFrequency);
 
-    printToFile("teste");
+    printToFile("output");
 
     return 0;
 }

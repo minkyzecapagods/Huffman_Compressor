@@ -1,136 +1,71 @@
 #include "../include/frequencyCounter.hpp"
 #include "../include/utils.hpp"
 
-#include <iostream>
-#include <set>
-#include <map>
-#include <vector>
 #include <fstream>
 #include <utility>
 
 using namespace std;
 
-map<string, int> keywordCount;
-map<string, int> operatorCount;
-map<string, int> identifierCount;
-map<string, int> charCount;
-map<string, int> whitespaceCount;
-map<string, int> frequentIdentifiers;
+map<string, int> stringFrequency;
+map<string, int> charFrequency;
 
 vector<pair<string, int>> sortedTokens;
 
-int minimumFrequency = 2;
+const int MIN_FREQUENCY = 3;
 
 void processFile(const string& filename){
     ifstream file(filename);
-    if (!file.is_open()){
-        cerr << "Erro ao abrir o arquivo: " << filename << endl;
+    if (!file.is_open()) {
+        cerr << "Error: unable to open '" << filename << "'." << endl;
         return;
     }
 
-    string fullText;
-    string line;
+    string fullText((istreambuf_iterator<char>(file)), istreambuf_iterator<char>());
 
-    while(getline(file, line)){
-        fullText += line + "\n";
-    }
     file.close();
 
-    size_t totalchars = fullText.length();
+    size_t totalChars = fullText.length();
 
     //primeiro checa a quantidade de vezes que cada palavra (identifier) aparece
-    for (size_t i = 0; i < fullText.length(); i++){
+    for (size_t i = 0; i < totalChars; i++) {
         char currentChar = fullText[i];
 
-        if(isspace(currentChar)){ continue; }
-
-        if (isInStringOrComment(fullText, i)) { continue; }
-
-        string multiOp = isMultiCharOp(fullText, i);
-        if (!multiOp.empty()){
-            i += multiOp.length() - 1;
-            continue;
-        }
-
-        if (isSingleCharOp(currentChar)) { continue; }
-
-        if (isalpha(currentChar) || currentChar == '_'){
-            string word = extractWord(fullText, i);
-
-            if (!isKeyword(word)){
-                identifierCount[word]++;
+        if (isspace(static_cast<unsigned char>(currentChar))) {
+            switch (currentChar) {
+                case ' ':  charFrequency[" "]++; break;
+                case '\n': charFrequency["\\n"]++; break;
+                case '\t': charFrequency["\\t"]++; break;
+                case '\r': charFrequency["\\r"]++; break;
+                case '\v': charFrequency["\\v"]++; break;
+                case '\f': charFrequency["\\f"]++; break;
+                default:   charFrequency["\\x" + to_string(static_cast<int>(currentChar))]++; 
             }
-            i +=word.length() - 1;
             continue;
         }
+
+
+        if (isalnum(currentChar) || currentChar == '_'){
+            string word = extractWord(fullText, i);
+            stringFrequency[word]++;
+            i += word.length() - 1; //pula para o final da palavra
+            continue;
+        }
+
+        size_t j = ignoreCommentOrString(fullText, i);
+        if (j != string::npos) {
+            i = j - 1;
+            continue;
+        }
+
+        charFrequency[string(1, currentChar)]++;
     }
 
-    for (size_t i = 0; i < totalchars; i++){
-        char currentChar = fullText[i];
-
-        if (currentChar == '\n') {
-            whitespaceCount["\\n"]++;
-            continue;
-        } else if (isspace(currentChar)) {
-            string tempString(1, currentChar);
-            whitespaceCount[tempString]++;
-            continue;
+    for (auto it = stringFrequency.begin(); it != stringFrequency.end(); ){ //filtra palavras pouco frequentes 
+        if (it->second < MIN_FREQUENCY){
+            for (char c : it->first)
+                charFrequency[string(1, c)] += it->second;
+            it = stringFrequency.erase(it);
         }
-
-        if (isInStringOrComment(fullText, i)){
-            string tempString(1, currentChar);
-            charCount[tempString]++;
-            continue;
-        }
-
-        string multiOp = isMultiCharOp(fullText, i);
-        if(!multiOp.empty()){
-            operatorCount[multiOp]++;
-            for(char c : multiOp){
-                string tempString(1, c);
-                charCount[tempString]++;
-            }
-            i += multiOp.length();
-            continue;
-        }
-
-        if (isSingleCharOp(currentChar)){
-            string singleOp(1, currentChar);
-            operatorCount[singleOp]++;
-            continue;
-        }
-
-        if(isalpha(currentChar) || currentChar == '_') {
-            string word = extractWord(fullText, i);
-
-            if(isKeyword(word)){
-                keywordCount[word]++;
-            } else if (identifierCount[word] <= minimumFrequency) { //se a palavra for pouco frequente;
-                for (char c : word){ 
-                    string tempString(1, c);                               //os chars dela são contados
-                    charCount[tempString]++;
-                }
-            }
-
-
-            i+= word.length() - 1; //pula para o final da palavra
-            continue;
-        }
-    }
-
-    for (const auto& identifier : identifierCount){ //filtra palavras pouco frequentes 
-        if (identifier.second > minimumFrequency){
-            frequentIdentifiers[identifier.first] = identifier.second;
-        }
+        else ++it;
     }  
-}
-
-void organizeTokens(){
-    vector<pair<string, int>> allTokens;
-
-    sortedTokens = unifyAndSort(keywordCount,
-                                operatorCount,
-                                frequentIdentifiers,
-                                charCount,
-                                whitespaceCount);
 }
