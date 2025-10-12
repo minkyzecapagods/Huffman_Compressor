@@ -5,6 +5,8 @@
 
 using namespace std;
 
+const string outputPath = "frequency_sheet/";
+
 string extractWord(const string& text, size_t pos){
     string word = "";
 
@@ -17,7 +19,6 @@ string extractWord(const string& text, size_t pos){
 
     return word;
 }
-
 
 // Retorna a posição logo após o comentário ou string, ou npos se não for comentário ou string
 size_t ignoreCommentOrString(const string& text, size_t pos){
@@ -71,7 +72,7 @@ vector<pair<string, int>> unifyAndSort(const map<string, int> charFrequency,
 
 
 void printToFile(string filename){
-    ofstream outputFile("frequency_cheat/" +filename + ".txt");
+    ofstream outputFile(outputPath + filename + ".txt");
     for (pair<string, int> i : sortedTokens){
         outputFile << '"' << i.first << '"' << ' ' << i.second << endl;
     }
