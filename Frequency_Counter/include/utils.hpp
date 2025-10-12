@@ -9,6 +9,10 @@
 
 using namespace std;
 
+string getPrintableChar(char c);
+
+void getFullCharMap(); 
+
 string extractWord(const string& text, size_t pos);
 
 size_t ignoreCommentOrString(const string& text, size_t pos);

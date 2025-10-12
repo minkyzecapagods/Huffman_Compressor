@@ -11,6 +11,8 @@ int main (int argc, char* argv[]){
     }
     string filename = argv[1];
 
+    getFullCharMap();
+
     processFile(filename);
     
     sortedTokens = unifyAndSort(stringFrequency, charFrequency);

@@ -7,6 +7,37 @@ using namespace std;
 
 const string outputPath = "frequency_sheet/";
 
+string getPrintableChar(char c) {
+    // Representações legíveis para caracteres de controle
+    switch (c) {
+        case '\0': return "\\0";
+        case '\a': return "\\a";
+        case '\b': return "\\b";
+        case '\t': return "\\t";
+        case '\n': return "\\n";
+        case '\v': return "\\v";
+        case '\f': return "\\f";
+        case '\r': return "\\r";
+        default:
+            if (static_cast<unsigned char>(c) < 32 || c == 127) {
+                return "\\x" + to_string(static_cast<int>(c)); // outros caracteres de controle
+            } else {
+                return string(1, c); // caracteres imprimíveis
+            }
+    }
+}
+
+void getFullCharMap() {
+    // ASCII de 0 a 127
+    for (int i = 0; i <= 127; ++i) {
+        char c = static_cast<char>(i);
+        string key = getPrintableChar(c);
+        if (key.rfind("\\x", 0) == 0) continue;
+        charFrequency[key] = 0; // frequência inicial zero
+    }
+}
+
+
 string extractWord(const string& text, size_t pos){
     string word = "";
 

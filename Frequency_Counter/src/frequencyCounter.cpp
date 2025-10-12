@@ -30,20 +30,6 @@ void processFile(const string& filename){
     for (size_t i = 0; i < totalChars; i++) {
         char currentChar = fullText[i];
 
-        if (isspace(static_cast<unsigned char>(currentChar))) {
-            switch (currentChar) {
-                case ' ':  charFrequency[" "]++; break;
-                case '\n': charFrequency["\\n"]++; break;
-                case '\t': charFrequency["\\t"]++; break;
-                case '\r': charFrequency["\\r"]++; break;
-                case '\v': charFrequency["\\v"]++; break;
-                case '\f': charFrequency["\\f"]++; break;
-                default:   charFrequency["\\x" + to_string(static_cast<int>(currentChar))]++; 
-            }
-            continue;
-        }
-
-
         if (isalnum(currentChar) || currentChar == '_'){
             string word = extractWord(fullText, i);
             stringFrequency[word]++;
@@ -56,8 +42,8 @@ void processFile(const string& filename){
             i = j - 1;
             continue;
         }
-
-        charFrequency[string(1, currentChar)]++;
+        
+        charFrequency[getPrintableChar(fullText[i])]++;
     }
 
     for (auto it = stringFrequency.begin(); it != stringFrequency.end(); ){ //filtra palavras pouco frequentes 
