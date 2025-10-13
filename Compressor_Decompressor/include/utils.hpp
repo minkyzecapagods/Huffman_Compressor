@@ -7,7 +7,7 @@ extern unordered_map<string, size_t> frequencyCheet;
 
 //comparador de HuffmanNodes para a criação da priority queue
 struct compare{
-    bool operator()(const shared_ptr<HuffmanNode>& left, const shared_ptr<HuffmanNode>& right);
+    bool operator()(const NodePtr& left, const NodePtr& right);
 };
 
 

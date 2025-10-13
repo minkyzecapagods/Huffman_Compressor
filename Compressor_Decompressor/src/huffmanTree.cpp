@@ -10,7 +10,7 @@ using namespace std;
 
 unordered_map<string, string> huffmanCodes;
 
-HuffmanNode::HuffmanNode(string data, size_t frequency, shared_ptr<HuffmanNode> left, shared_ptr<HuffmanNode> right){
+HuffmanNode::HuffmanNode(string data, size_t frequency, NodePtr left, NodePtr right){
     this->data = data;
     this->frequency = frequency;
     this->left = left;
@@ -19,7 +19,7 @@ HuffmanNode::HuffmanNode(string data, size_t frequency, shared_ptr<HuffmanNode> 
 
 void buildHuffmanTree(const unordered_map<string, size_t>& frequencyCheet){
 
-    priority_queue<shared_ptr<HuffmanNode>, vector<shared_ptr<HuffmanNode>>, compare> pq;
+    priority_queue<NodePtr, vector<NodePtr>, compare> pq;
 
     for (const auto& pair : frequencyCheet) {
         pq.push(make_shared<HuffmanNode>(pair.first, pair.second));
@@ -37,7 +37,7 @@ void buildHuffmanTree(const unordered_map<string, size_t>& frequencyCheet){
     storeCodes(root, "");
 }
 
-void storeCodes(const shared_ptr<HuffmanNode>& root, const string& str){
+void storeCodes(const NodePtr& root, const string& str){
     if (!root) return;
 
     if (!root->left && !root->right){

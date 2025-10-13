@@ -17,9 +17,11 @@ struct HuffmanNode{
 
 };
 
+using NodePtr = std::shared_ptr<HuffmanNode>;
+
 //constrói a arvore
 void buildHuffmanTree(const unordered_map<string, size_t>& frequencyCheet);
 
 //guarda os códigos de cada token no unordered_map huffmanCodes
-void storeCodes(const shared_ptr<HuffmanNode>& root, const string& str);
+void storeCodes(const NodePtr& root, const string& str);
 

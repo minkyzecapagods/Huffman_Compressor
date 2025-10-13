@@ -4,60 +4,36 @@
 #include <string>
 #include <iostream>
 #include <iomanip>
+#include <regex>
 #include <unordered_map>
 
 using namespace std;
 
 unordered_map<string, size_t> frequencyCheet;
 
-bool compare::operator()(const shared_ptr<HuffmanNode>& left, 
-                        const shared_ptr<HuffmanNode>& right) {
+bool compare::operator()(const NodePtr& left, 
+                        const NodePtr& right) {
     // Min-heap: menor frequência tem maior prioridade
     return left->frequency > right->frequency;
 }
 
-void processFile(const string& fileName){
-    ifstream file(fileName);
+void processFile(const string& filename){
+    ifstream file(filename);
     if(!file.is_open()){
-        cerr << "Error: Could not open the file." << endl;
+        cerr << "Error: unable to open '" << filename << "'." << endl;
         return;
     }
-
+    regex linePattern(R"REG(^"((?:\\x[0-9A-Fa-f]{2}|\\[abfnrtv\\'"]|[A-Za-z0-9_]|.)+)" ([0-9]+)$)REG");
     string line;
+    smatch match;
 
-    while(getline(file, line)){ //deve ter uma maneira melhor de fazer isso com regex :P
-        istringstream iss(line);
-        string data;
-        size_t frequency;
-        char c;
-        
-        if(!(iss >> c) || c != '"'){
-            cerr << "Error: Expected opening quote." << endl;
-            continue;
+    while (getline(file, line)) {
+        if (regex_match(line, match, linePattern)) {
+            string key = match[1].str();   // conteúdo entre aspas
+            int value = stoi(match[2].str()); // número após o espaço
+            frequencyCheet.insert({key, value});
+        } else {
+            cerr << "Linha inválida: " << line << endl;
         }
-
-        bool firstChar = true; // necessário para a leitura de aspas duplas literais
-
-        while(iss.get(c)){
-            if(c == '"' && !firstChar){
-                break;
-            }
-            firstChar = false;
-            data += c;
-        }
-
-        if (c != '"'){
-            cerr << "Error: No closing quote found." << endl;
-            continue;
-        }
-
-        iss >> ws;
-
-        if(!(iss >> frequency)){
-            cerr << "Error: Worng frequency format. Line: " << line << endl;
-            continue;
-        }
-
-        frequencyCheet.insert({data, frequency});
     }
 }

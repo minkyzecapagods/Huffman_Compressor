@@ -10,8 +10,7 @@ int main (int argc, char* argv[]){
         return 1;
     }
 
-    string name = argv[1];
-    string filename = name + ".txt";
+    string filename = argv[1];
 
     processFile(filename); //popula o unordered_map frequencyCheet
 
