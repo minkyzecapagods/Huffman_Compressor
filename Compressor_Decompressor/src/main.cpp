@@ -1,4 +1,4 @@
-#include "../include/huffmanTree.hpp"
+#include "../include/HuffmanTree.hpp"
 #include "../include/utils.hpp"
 
 #include <iostream>

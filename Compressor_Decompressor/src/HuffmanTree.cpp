@@ -1,10 +1,10 @@
-#include "../include/huffmanTree.hpp"
+#include "../include/HuffmanTree.hpp"
+#include "../include/MinHeap.hpp"
 #include "../include/utils.hpp"
 
 #include <memory>
 #include <iostream>
 #include <unordered_map>
-#include <queue>
 
 using namespace std;
 
@@ -19,21 +19,21 @@ HuffmanNode::HuffmanNode(string data, size_t frequency, NodePtr left, NodePtr ri
 
 void buildHuffmanTree(const unordered_map<string, size_t>& frequencyCheet){
 
-    priority_queue<NodePtr, vector<NodePtr>, compare> pq;
+    MinHeap pq;
 
     for (const auto& pair : frequencyCheet) {
         pq.push(make_shared<HuffmanNode>(pair.first, pair.second));
     }
 
     while (pq.size() > 1) {
-        auto left = pq.top(); pq.pop();
-        auto right = pq.top(); pq.pop();
+        auto left = pq.pop();
+        auto right = pq.pop();
 
         size_t sum = left->frequency + right->frequency;
         pq.push(make_shared<HuffmanNode>(string(), sum, left, right));
     }
     
-    auto root = pq.top();
+    auto root = pq.pop();
     storeCodes(root, "");
 }
 

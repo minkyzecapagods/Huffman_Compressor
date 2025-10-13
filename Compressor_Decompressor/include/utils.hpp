@@ -1,5 +1,5 @@
 #pragma once
-#include "huffmanTree.hpp"
+#include "HuffmanTree.hpp"
 #include <iostream>
 #include <unordered_map>
 
