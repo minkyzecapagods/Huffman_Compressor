@@ -16,7 +16,9 @@
 
 # Debugger Files
 *.pdb
-frequency_sheet/*
+*.txt
+*.bin
+frequency_sheet/*.txt
 
 # Compiled Dynamic libraries
 *.so
