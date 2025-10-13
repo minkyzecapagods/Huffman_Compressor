@@ -35,6 +35,7 @@ frequency_sheet/*
 
 # Executables
 frequency_counter
+compressor_decompressor
 *.exe
 *.out
 *.app
