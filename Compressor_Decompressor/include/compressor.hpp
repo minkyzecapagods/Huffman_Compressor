@@ -4,4 +4,4 @@
 #include <unordered_map>
 #include <string>
 
-std::string compressFile(const std::string& filename);
+void compressFile(const std::string& filename);

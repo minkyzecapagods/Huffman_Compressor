@@ -1,23 +1,33 @@
 #include "../include/HuffmanTree.hpp"
 #include "../include/utils.hpp"
+#include "../include/compressor.hpp"
 
 #include <iostream>
 
 int main (int argc, char* argv[]){
+    string argv1, argv2, argv3;
+    if (argc >= 2) argv1 = argv[1];
+    if (argc >= 3) argv2 = argv[2];
+    if (argc >= 4) argv3 = argv[3];
 
-    if(argc != 2){
-        cerr << "Erro: número incorreto de argumentos!" << endl;
-        return 1;
+    if (argc == 2 && (argv1 == "--help" || argv1 == "-h")) {
+        cout << "Usage: " << argv[0] << " <frequency_sheet> <file_to_compress>" << endl;
+        return 0;
     }
 
-    string filename = argv[1];
+    cout << "Arguments received: " << endl;
 
-    processFile(filename); //popula o unordered_map frequencyCheet
+    if (argv1 == "--compress" || argv1 == "-c") {
+        cout << "Compressing file: " << argv2 << " using frequency sheet: " << argv3 << endl;
+        processFile(argv2); //popula o unordered_map frequencySheet
+        buildHuffmanTree(frequencySheet);
+        compressFile(argv3);
 
-    buildHuffmanTree(frequencyCheet);
+        return 0;
+    }
 
     for (auto pair : huffmanCodes){
-        cout << pair.first << " : " << pair.second << endl;
+       cout << pair.first << " : " << pair.second << endl;
     }
 
     return 0;

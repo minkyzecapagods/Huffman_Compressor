@@ -3,7 +3,7 @@
 #include <iostream>
 #include <unordered_map>
 
-extern unordered_map<string, size_t> frequencyCheet;
+extern unordered_map<string, size_t> frequencySheet;
 
 //comparador de HuffmanNodes para a criação da priority queue
 struct compare{
@@ -13,3 +13,9 @@ struct compare{
 
 //transforma o .txt do Frequency_Counter em um unordered_map
 void processFile(const string& fileName);
+
+string escapeCharToChar(string s);
+
+void binToText(const string& filename);
+
+string byteToBinaryString(unsigned char byte);

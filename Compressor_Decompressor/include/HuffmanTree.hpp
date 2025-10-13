@@ -2,6 +2,7 @@
 #include <iostream>
 #include <memory>
 #include <unordered_map>
+#include <vector>
 using namespace std;
 
 extern unordered_map<string, string> huffmanCodes;
@@ -20,8 +21,6 @@ struct HuffmanNode{
 using NodePtr = std::shared_ptr<HuffmanNode>;
 
 //constrói a arvore
-void buildHuffmanTree(const unordered_map<string, size_t>& frequencyCheet);
+void buildHuffmanTree(const unordered_map<string, size_t>& frequencySheet);
 
-//guarda os códigos de cada token no unordered_map huffmanCodes
-void storeCodes(const NodePtr& root, const string& str);
-
+vector<unsigned char> serializeTree();
