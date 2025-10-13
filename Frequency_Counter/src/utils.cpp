@@ -10,7 +10,6 @@ const string outputPath = "frequency_sheet/";
 string getPrintableChar(char c) {
     // Representações legíveis para caracteres de controle
     switch (c) {
-        case '\0': return "\\0";
         case '\a': return "\\a";
         case '\b': return "\\b";
         case '\t': return "\\t";
