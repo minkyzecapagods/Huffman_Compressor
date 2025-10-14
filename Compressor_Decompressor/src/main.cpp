@@ -19,7 +19,7 @@ int main (int argc, char* argv[]){
     cout << "Arguments received: " << endl;
 
     if (argv1 == "--compress" || argv1 == "-c") {
-        cout << "Compressing file: " << argv2 << " using frequency sheet: " << argv3 << endl;
+        cout << "Compressing file: " << argv3 << " using frequency sheet: " << argv2 << endl;
         processFile(argv2); //popula o unordered_map frequencySheet
         buildHuffmanTree(frequencySheet);
         compressFile(argv3);
@@ -28,7 +28,7 @@ int main (int argc, char* argv[]){
     }
 
     if (argv1 == "--decompress" || argv1 == "-d") {
-        cout << "Decompressing file: " << argv2 << " using frequency sheet: " << argv3 << endl;
+        cout << "Decompressing file: " << argv3 << " using frequency sheet: " << argv2 << endl;
         processFile(argv2); //popula o unordered_map frequencySheet
         buildHuffmanTree(frequencySheet);
         decompressFile(argv3);
@@ -39,6 +39,6 @@ int main (int argc, char* argv[]){
     for (auto pair : huffmanCodes){
        cout << pair.first << " : " << pair.second << endl;
     }
-
+//zzzzzz
     return 0;
 }
