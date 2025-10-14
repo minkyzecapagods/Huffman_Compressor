@@ -40,8 +40,9 @@ void decompressFile(const string& filename){
         basename = filename.substr(0, pos);
     }
 
-    string outFilename = basename + "_decompressed";
-    ofstream outFile(outFilename);
+    string outFilename = basename;
+    string extension = ".cpp";
+    ofstream outFile(outFilename + "_decompressed" + extension);
     if (!outFile) {
         cerr << "Error: could not create output file '" << outFilename << "'" << endl;
         return;
