@@ -36,9 +36,5 @@ int main (int argc, char* argv[]){
         return 0;
     }
 
-    for (auto pair : huffmanCodes){
-       cout << pair.first << " : " << pair.second << endl;
-    }
-//zzzzzz
     return 0;
 }
