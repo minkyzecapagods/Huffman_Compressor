@@ -12,7 +12,6 @@ void decompressFile(const string& filename){
         return;
     }
 
-    // First byte contains padding (8 bits)
     if (allBits.size() < 8) {
         cerr << "Error: input too short to contain padding info" << endl;
         return;
@@ -41,7 +40,6 @@ void decompressFile(const string& filename){
         basename = filename.substr(0, pos);
     }
 
-    // write to output file with original basename + _decompressed
     string outFilename = basename + "_decompressed";
     ofstream outFile(outFilename);
     if (!outFile) {

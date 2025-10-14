@@ -85,21 +85,19 @@ string decToBinary(int n){
         n /= 2;
     }
     
-    // reverse the string 
 	reverse(bin.begin(), bin.end());
     return bin;
 }
 
 string decodeBitSequence(const NodePtr root, const string& bits, size_t& index){
     NodePtr current = root;
-    // Traverse the tree consuming bits until a leaf is reached or we run out of bits
+
     while (!current->isLeaf() && index < bits.size()) {
         if (bits[index] == '0') {
             current = current->left;
         } else {
             current = current->right;
         }
-        // advance the index for each bit consumed
         ++index;
         if (!current) break;
     }
