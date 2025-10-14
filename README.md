@@ -1,7 +1,5 @@
 # Huffman_Compressor
 
-Instruções rápidas em Português para compilar e executar as ferramentas incluídas neste repositório.
-
 Requisitos
 - g++ com suporte a C++17
 - make
@@ -18,14 +16,6 @@ Isso gera dois executáveis no diretório do projeto:
 - `frequency_counter` — ferramenta que conta tokens/caracteres em arquivos fonte
 - `compressor_decompressor` — ferramenta para compressão e descompressão (Huffman)
 
-Você também pode compilar apenas um alvo:
-
-```bash
-make frequency_counter
-# ou
-make compressor_decompressor
-```
-
 Limpar build
 
 ```bash
@@ -34,7 +24,7 @@ make clean
 
 Uso: Frequency Counter
 ------------------------
-O `frequency_counter` calcula frequências de símbolos/palavras a partir de um arquivo fonte ou de todos os arquivos `.cpp` dentro de uma pasta (não recursivo).
+O `frequency_counter` calcula frequências de símbolos/palavras a partir de um arquivo fonte ou de todos os arquivos `.cpp` e `.hpp` dentro de uma pasta (não recursivo).
 
 Sintaxe:
 ```bash
@@ -60,7 +50,7 @@ O binário `compressor_decompressor` tem duas operações:
 - Compressão: `--compress` (ou `-c`)
 - Descompressão: `--decompress` (ou `-d`)
 
-IMPORTANTE: a implementação atual espera um arquivo de "frequency sheet" (gerado pelo `frequency_counter`) para construir a árvore de Huffman. Tipicamente você usará `frequency_sheet/output.txt`.
+IMPORTANTE: a implementação atual espera um arquivo de "frequency sheet" (gerado pelo `frequency_counter`) para construir a árvore de Huffman. Geralmente `frequency_sheet/output.txt` deve ser utilizado.
 
 Compressão (exemplo):
 ```bash
@@ -72,4 +62,4 @@ Descompressão (exemplo):
 ```bash
 ./compressor_decompressor --decompress frequency_sheet/output.txt path/para/arquivo_a_comprimir.cpp_compressed.bin
 ```
-- Saída: cria um ficheiro com o nome original acrescido de `_decompressed`, por exemplo `path/para/arquivo_a_comprimir.cpp_decompressed`.
+- Saída: cria um ficheiro com o nome original acrescido de `_decompressed`, por exemplo `path/para/arquivo_a_comprimir.cpp_decompressed`, assim, você consegue manter o arquivo original e testar com `diff` se há ou não perda de dados entre o arquivo original e a descompressão do arquivo comprimido.
