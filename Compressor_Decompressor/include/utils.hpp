@@ -16,8 +16,10 @@ void processFile(const string& fileName);
 
 string escapeCharToChar(string s);
 
-void binToText(const string& filename);
+string binToString(const string& filename);
 
 string byteToBinaryString(unsigned char byte);
 
 string decToBinary(int n);
+
+string decodeBitSequence(const NodePtr root, const string& bits, size_t& index);

@@ -7,6 +7,4 @@
 
 using namespace std;
 
-void compressFile(const string& filename);
-
-string findLongestToken(ifstream& file);
+void decompressFile(const string& filename);

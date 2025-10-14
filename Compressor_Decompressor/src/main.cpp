@@ -1,6 +1,7 @@
 #include "../include/HuffmanTree.hpp"
 #include "../include/utils.hpp"
 #include "../include/compressor.hpp"
+#include "../include/decompressor.hpp"
 
 #include <iostream>
 
@@ -22,6 +23,15 @@ int main (int argc, char* argv[]){
         processFile(argv2); //popula o unordered_map frequencySheet
         buildHuffmanTree(frequencySheet);
         compressFile(argv3);
+
+        return 0;
+    }
+
+    if (argv1 == "--decompress" || argv1 == "-d") {
+        cout << "Decompressing file: " << argv2 << " using frequency sheet: " << argv3 << endl;
+        processFile(argv2); //popula o unordered_map frequencySheet
+        buildHuffmanTree(frequencySheet);
+        decompressFile(argv3);
 
         return 0;
     }

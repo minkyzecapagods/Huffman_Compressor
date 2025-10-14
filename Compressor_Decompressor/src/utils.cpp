@@ -54,39 +54,28 @@ string byteToBinaryString(unsigned char byte){
     return bitset<8>(byte).to_string();
 }
 
-void binToText(const string& filename = "../output.bin"){
+string binToString(const string& filename = "../output.bin"){
     ifstream bin(filename);
-    ofstream txt("saida.txt");
 
     if(!bin){
         cerr << "Error: could not open " << filename << endl;
-        return;
+        return "";
     }
 
-    if(!txt){
-        cerr << "Error: Could not create saida.txt" << endl;
-        return;
-    }
-
-    vector<string> byteAsBinary;
+    string bytesAsBinary;
     unsigned char byte;
 
     while(bin.read(reinterpret_cast<char*>(&byte), sizeof(byte))){
         string binaryStr = byteToBinaryString(byte);
-        byteAsBinary.push_back(binaryStr);
+        bytesAsBinary += binaryStr;
     }
 
-    for (size_t i = 0; i < byteAsBinary.size(); i++){
-        txt << byteAsBinary[i];
-        if(i < byteAsBinary.size() - 1){
-            txt << " "; //espaço entre os bytes
-        }
-    }
+    bin.close();
 
-    txt.close(); bin.close();
+    return bytesAsBinary;
 }
 
-string decToBinary(int n) {
+string decToBinary(int n){
     
     string bin = "";
     while (n > 0) {
@@ -99,4 +88,26 @@ string decToBinary(int n) {
     // reverse the string 
 	reverse(bin.begin(), bin.end());
     return bin;
+}
+
+string decodeBitSequence(const NodePtr root, const string& bits, size_t& index){
+    NodePtr current = root;
+    // Traverse the tree consuming bits until a leaf is reached or we run out of bits
+    while (!current->isLeaf() && index < bits.size()) {
+        if (bits[index] == '0') {
+            current = current->left;
+        } else {
+            current = current->right;
+        }
+        // advance the index for each bit consumed
+        ++index;
+        if (!current) break;
+    }
+
+    if (current && current->isLeaf()) {
+        return current->data;
+    } else {
+        cerr << "Error: could not get to a leaf node in the Huffman Tree." << endl;
+        return "";
+    }
 }

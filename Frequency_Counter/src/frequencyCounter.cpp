@@ -26,7 +26,6 @@ void processFile(const string& filename){
 
     size_t totalChars = fullText.length();
 
-    //primeiro checa a quantidade de vezes que cada palavra (identifier) aparece
     for (size_t i = 0; i < totalChars; i++) {
         char currentChar = fullText[i];
 

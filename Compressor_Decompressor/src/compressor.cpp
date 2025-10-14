@@ -68,7 +68,7 @@ void compressFile(const string& filename){
         cerr << "Error: unable to create compressed file." << endl;
         return;
     }
-
+    //maxTokenLength == 8
     while(inFile.peek() != EOF){
         string token = findLongestToken(inFile);
         if(!token.empty()){

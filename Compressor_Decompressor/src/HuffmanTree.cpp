@@ -20,6 +20,10 @@ HuffmanNode::HuffmanNode(string data, size_t frequency, NodePtr left, NodePtr ri
     this->right = right;
 }
 
+bool HuffmanNode::isLeaf(){
+    return this->left == nullptr && this->right == nullptr;
+}
+
 void storeCodes(const NodePtr& root, const string& str){
     if (!root) return;
 
