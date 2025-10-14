@@ -4,11 +4,13 @@
 
 #include <memory>
 #include <iostream>
+#include <cstdint>
 #include <unordered_map>
 
 using namespace std;
 
 unordered_map<string, string> huffmanCodes;
+size_t maxTokenLength = 0;
 NodePtr treeRoot = nullptr;
 
 HuffmanNode::HuffmanNode(string data, size_t frequency, NodePtr left, NodePtr right){
@@ -48,6 +50,16 @@ void buildHuffmanTree(const unordered_map<string, size_t>& frequencySheet){
     
     treeRoot = pq.pop();
     storeCodes(treeRoot, "");
+    updateMaxTokenLength();
+}
+
+
+void updateMaxTokenLength(){
+    for (const auto pair : huffmanCodes){
+        if(pair.first.length() > maxTokenLength){
+            maxTokenLength = pair.first.length();
+        }
+    }
 }
 
 void serializeTreeBinary(NodePtr node, vector<unsigned char>& buffer) {

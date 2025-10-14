@@ -19,3 +19,5 @@ string escapeCharToChar(string s);
 void binToText(const string& filename);
 
 string byteToBinaryString(unsigned char byte);
+
+string decToBinary(int n);

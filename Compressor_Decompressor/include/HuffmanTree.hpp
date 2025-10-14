@@ -6,6 +6,7 @@
 using namespace std;
 
 extern unordered_map<string, string> huffmanCodes;
+extern size_t maxTokenLength;
 
 struct HuffmanNode{
     string data;
@@ -24,3 +25,5 @@ using NodePtr = std::shared_ptr<HuffmanNode>;
 void buildHuffmanTree(const unordered_map<string, size_t>& frequencySheet);
 
 vector<unsigned char> serializeTree();
+
+void updateMaxTokenLength();
