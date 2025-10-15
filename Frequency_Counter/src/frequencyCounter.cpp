@@ -2,12 +2,13 @@
 #include "../include/utils.hpp"
 
 #include <fstream>
+#include <unordered_map>
 #include <utility>
 
 using namespace std;
 
-map<string, int> stringFrequency;
-map<string, int> charFrequency;
+unordered_map<string, int> stringFrequency;
+unordered_map<string, int> charFrequency;
 
 vector<pair<string, int>> sortedTokens;
 

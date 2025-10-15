@@ -85,8 +85,8 @@ bool sortByFrequency(const pair<string, int> a, const pair<string, int> b){
     return a.second > b.second; 
 }
 
-vector<pair<string, int>> unifyAndSort(const map<string, int> charFrequency,
-                                       const map<string, int> stringFrequency){
+vector<pair<string, int>> unifyAndSort(const unordered_map<string, int> charFrequency,
+                                       const unordered_map<string, int> stringFrequency){
     vector<pair<string, int>> allTokens;
 
     for (const auto& pair : charFrequency)

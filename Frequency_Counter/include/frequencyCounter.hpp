@@ -2,14 +2,14 @@
 
 #include <iostream>
 #include <set>
-#include <map>
 #include <string>
 #include <vector>
+#include <unordered_map>
 
 using namespace std;
 
-extern map<string, int> charFrequency;
-extern map<string, int> stringFrequency;
+extern unordered_map<string, int> stringFrequency;
+extern unordered_map<string, int> charFrequency;
 
 extern vector<pair<string, int>> sortedTokens;
 

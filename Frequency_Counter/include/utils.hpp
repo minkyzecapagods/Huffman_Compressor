@@ -3,7 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <utility>
-#include <map>
+#include <unordered_map>
 #include <algorithm>
 #include <set>
 
@@ -19,7 +19,7 @@ size_t ignoreCommentOrString(const string& text, size_t pos);
 
 bool sortByFrequency(const pair<string, int> a, const pair<string, int> b);
 
-vector<pair<string, int>> unifyAndSort(const map<string, int> stringFrequency,
-                                       const map<string, int> charFrequency);
+vector<pair<string, int>> unifyAndSort(const unordered_map<string, int> stringFrequency,
+                                       const unordered_map<string, int> charFrequency);
 
 void printToFile(string filename);
