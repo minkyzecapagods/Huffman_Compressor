@@ -27,6 +27,4 @@ extern NodePtr treeRoot;
 //constrói a arvore
 void buildHuffmanTree(const unordered_map<string, size_t>& frequencySheet);
 
-vector<unsigned char> serializeTree();
-
 void updateMaxTokenLength();

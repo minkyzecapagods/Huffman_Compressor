@@ -76,7 +76,7 @@ void compressFile(const string& filename){
         } else {
             char ch;
             inFile.get(ch);
-            cerr << "Error: character not found in FrequencySheet" << endl;
+            cerr << "Error: character not found in FrequencySheet " << ch << endl;
             return;
         }
     }

@@ -65,30 +65,3 @@ void updateMaxTokenLength(){
         }
     }
 }
-
-void serializeTreeBinary(NodePtr node, vector<unsigned char>& buffer) {
-    if (!node) return;
-
-    if (!node->left && !node->right) {
-        buffer.push_back(1); // marcador de folha
-
-        // grava tamanho da string (4 bytes)
-        uint32_t len = node->data.size();
-        const unsigned char* lenBytes = reinterpret_cast<const unsigned char*>(&len);
-        buffer.insert(buffer.end(), lenBytes, lenBytes + sizeof(len));
-
-        // grava bytes da string literal
-        buffer.insert(buffer.end(), node->data.begin(), node->data.end());
-    } 
-    else {
-        buffer.push_back(0); // marcador de nó interno
-        serializeTreeBinary(node->left, buffer);
-        serializeTreeBinary(node->right, buffer);
-    }
-}
-
-vector<unsigned char> serializeTree() {
-    vector<unsigned char> buffer;
-    serializeTreeBinary(treeRoot, buffer);
-    return buffer;
-}

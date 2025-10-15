@@ -13,7 +13,7 @@ unordered_map<string, size_t> frequencySheet;
 
 bool compare::operator()(const NodePtr& left, 
                         const NodePtr& right) {
-    // Min-heap: menor frequência tem maior prioridade
+    // Min-heap: menor frequencia tem maior prioridade
     return left->frequency > right->frequency;
 }
 
@@ -29,11 +29,11 @@ void processFile(const string& filename){
 
     while (getline(file, line)) {
         if (regex_match(line, match, linePattern)) {
-            string key = match[1].str();   // conteúdo entre aspas
-            int value = stoi(match[2].str()); // número após o espaço
+            string key = match[1].str();   // conteudo entre aspas
+            int value = stoi(match[2].str()); // numero apos o espaço
             frequencySheet.insert({key, value});
         } else {
-            cerr << "Linha inválida: " << line << endl;
+            cerr << "Linha invalida: " << line << endl;
         }
     }
 }
